@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YAYYY 💕</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<audio id="bgMusic" autoplay loop>
+    <source src="imagemm/music.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- Floating Hearts -->
+<div class="hearts">
+    <span>💗</span>
+    <span>💕</span>
+    <span>💖</span>
+    <span>💘</span>
+    <span>💞</span>
+</div>
+
+<!-- Sparkles -->
+<div class="sparkles"></div>
+
+<div class="container">
+    <h1>OMG SHE SAID YESSS 💗✨</h1>
+    <p>Galentine confirmed 💕  
+    There's no going back. 🎀</p>
+
+    <h2>Forever Besties 🤍💖</h2>
+
+    <!-- Photo Section -->
+    <div class="gallery">
+        <img src="imagemm/mm1.jpeg" alt="Memory 1">
+        <img src="imagemm/mm2.jpeg" alt="Memory 2">
+        <img src="imagemm/mm3.jpeg" alt="Memory 3">
+    </div>
+</div>
+
+<script>
+window.onload = function() {
+    if (localStorage.getItem("playMusic") === "true") {
+        const music = document.getElementById("bgMusic");
+        music.play();
+        localStorage.removeItem("playMusic");
+    }
+}
+</script>
+
+</body>
+</html>

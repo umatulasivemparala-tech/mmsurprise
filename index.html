@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Will You Be My Galentine? 💕</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Will You Be My Galentine? 💗</h1>
+    <p>You’re my forever bestie 🤍  
+    Sooo… will you celebrate Galentine’s with me? 💕</p>
+
+    <div class="buttons">
+        <button id="yesBtn">YESSS 💖</button>
+        <button id="noBtn">No 😒</button>
+    </div>
+</div>
+
+<canvas id="confettiCanvas"></canvas>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+let yesSize = 1;
+let noSize = 1;
+
+// YES button logic
+yesBtn.addEventListener("click", function() {
+    localStorage.setItem("playMusic", "true");
+    startConfetti();
+    setTimeout(() => {
+        window.location.href = "celebrate.html";
+    }, 2000);
+});
+
+// NO button shrinking logic
+noBtn.addEventListener("click", function() {
+    yesSize += 0.2;
+    noSize -= 0.2;
+
+    yesBtn.style.transform = "scale(" + yesSize + ")";
+    noBtn.style.transform = "scale(" + noSize + ")";
+
+    if (noSize <= 0.2) {
+        noBtn.style.display = "none";
+    }
+});
+
+// Confetti setup
+const canvas = document.getElementById("confettiCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let confetti = [];
+
+function startConfetti() {
+    confetti = [];
+    for (let i = 0; i < 150; i++) {
+        confetti.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 8 + 4,
+            speed: Math.random() * 3 + 2,
+            color: `hsl(${Math.random() * 360}, 100%, 70%)`
+        });
+    }
+    animateConfetti();
+}
+
+function animateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    confetti.forEach((piece) => {
+        piece.y += piece.speed;
+        ctx.fillStyle = piece.color;
+        ctx.fillRect(piece.x, piece.y, piece.size, piece.size);
+
+        if (piece.y > canvas.height) {
+            piece.y = 0;
+        }
+    });
+
+    requestAnimationFrame(animateConfetti);
+}
+</script>
+</body> </html>
